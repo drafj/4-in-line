@@ -388,6 +388,8 @@ MonoBehaviour:
   height: 6
   puzzlePiece: {fileID: 1710544726386920559, guid: 3a0fc36e8e10ad541ad3536c253b5571,
     type: 3}
+  jugadorUno: {r: 0.9870663, g: 1, b: 0.033018887, a: 0}
+  jugadorDos: {r: 0.16789784, g: 0.32941177, b: 0.7264151, a: 0}
 --- !u!4 &813461572
 Transform:
   m_ObjectHideFlags: 0

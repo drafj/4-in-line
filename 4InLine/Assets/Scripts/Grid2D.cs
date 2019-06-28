@@ -8,6 +8,8 @@ public class Grid2D : MonoBehaviour
     public int height;
     public GameObject puzzlePiece;
     private GameObject[,] grid; 
+    public Color jugadorUno;
+    public Color jugadorDos;
 
     void Start()
     {
