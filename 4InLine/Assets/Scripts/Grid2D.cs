@@ -27,13 +27,24 @@ public class Grid2D : MonoBehaviour
     void Update()
     {
         Vector3 mposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.DrawLine(Vector3.zero, mposition);
-        int x = (int) (mposition.x + 0.5f);
-        int y = (int) (mposition.x + 0.5f);
-        if (x >= 0 && y >= 0 && x < width && y > height)
+        UpdatePickedPiece(mposition);
+    }
+    void UpdatePickedPiece(Vector3 position)
+    {
+        int x = (int) (position.x + 0.5f);        
+        int y = (int) (position.y + 0.5f);
+        for (int _x = 0; _x < width; _x++)
         {
-        GameObject go = grid[x,y];
-        go.GetComponent<Renderer>().material.SetColor("_color", Color.red);
+            for (int _y = 0; _y < height; _y++)
+            {
+            GameObject go = grid[_x, _y];
+            go.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+            }
+        }
+        if (x >= 0 && y >= 0 && x < width && y < height)
+        {
+            GameObject go = grid[x,y];
+            go.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }
     }
 }
