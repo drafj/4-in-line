@@ -257,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 2.5, z: -10}
+  m_LocalPosition: {x: 4.57, y: 4.45, z: -9.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -349,8 +349,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790563849}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.47, y: 2.61, z: 4.1541977}
-  m_LocalScale: {x: 0.953985, y: 0.953985, z: 0.953985}
+  m_LocalPosition: {x: 4.39, y: 3.97, z: 4.1541977}
+  m_LocalScale: {x: 1.2897877, y: 1.2897877, z: 1.2897877}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -384,9 +384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624a98bd351275c4a8aa5c0c0e6ae539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 6
-  height: 6
-  puzzlePiece: {fileID: 1710544726386920559, guid: 3a0fc36e8e10ad541ad3536c253b5571,
+  width: 10
+  height: 10
+  puzzlePiece: {fileID: 5939628201469285807, guid: da7376ef00cdff0438dd689fb0ba0648,
     type: 3}
   jugadorUno: {r: 0.9870663, g: 1, b: 0.033018887, a: 0}
   jugadorDos: {r: 0.16789784, g: 0.32941177, b: 0.7264151, a: 0}
