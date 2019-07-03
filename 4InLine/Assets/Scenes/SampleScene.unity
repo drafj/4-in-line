@@ -257,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.57, y: 4.45, z: -9.4}
+  m_LocalPosition: {x: 4.57, y: 4.45, z: -13.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -384,12 +384,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624a98bd351275c4a8aa5c0c0e6ae539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 10
-  height: 10
+  ancho: 10
+  alto: 10
   puzzlePiece: {fileID: 5939628201469285807, guid: da7376ef00cdff0438dd689fb0ba0648,
     type: 3}
   jugadorUno: {r: 0.9870663, g: 1, b: 0.033018887, a: 0}
   jugadorDos: {r: 0.16789784, g: 0.32941177, b: 0.7264151, a: 0}
+  turnos: 0
 --- !u!4 &813461572
 Transform:
   m_ObjectHideFlags: 0
