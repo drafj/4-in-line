@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class Grid2D : MonoBehaviour
 {
-    public int width;
-    public int height;
+    public int ancho;
+    public int alto;
     public GameObject puzzlePiece;
-    private GameObject[,] grid; 
+    private GameObject[,] cub; 
     public Color jugadorUno;
     public Color jugadorDos;
+    public bool turnos;
 
     void Start()
     {
-        grid = new GameObject[width,height];
-        for (int x = 0;  x < width; x++)
+        cub = new GameObject[ancho,alto];
+        for (int x = 0;  x < ancho; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < alto; y++)
             {
-                GameObject go = GameObject.Instantiate(puzzlePiece) as GameObject;
+                GameObject cube = GameObject.Instantiate(puzzlePiece) as GameObject;
                 Vector3 position = new Vector3(x, y, 0);
-                go.transform.position = position;
-                grid [x, y] = go;
+                cube.transform.position = position;
+
+                cube.GetComponent<Renderer>().material.color = Color.black;
+
+                cub [x, y] = cube;
             }
         }
     }
@@ -29,24 +33,125 @@ public class Grid2D : MonoBehaviour
     void Update()
     {
         Vector3 mposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        UpdatePickedPiece(mposition);
+        selec(mposition);
     }
-    void UpdatePickedPiece(Vector3 position)
+    
+    public void selec(Vector3 posicion)
     {
-        int x = (int) (position.x + 0.5f);        
-        int y = (int) (position.y + 0.5f);
-        for (int _x = 0; _x < width; _x++)
+        int x = (int) (posicion.x + 0.5f);        
+        int y = (int) (posicion.y + 0.5f);
+
+        if (Input.GetButtonDown("Fire1"))
         {
-            for (int _y = 0; _y < height; _y++)
+            if (x >= 0 && y >= 0 && x < ancho && y < alto)
             {
-            GameObject go = grid[_x, _y];
-            go.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                GameObject cube = cub[x,y];
+                if (cube.GetComponent<Renderer>().material.color == Color.black)
+                {
+                    Color colorActual = Color.clear;
+                    if (turnos)
+                        colorActual = jugadorUno;
+                    else
+                        colorActual = jugadorDos;
+                    cube.GetComponent<Renderer>().material.color = colorActual;
+                    turnos = !turnos;
+                    verificacionHorizontal(x, y, colorActual);
+                    verificacionVertical(x, y, colorActual);
+                    verificacionDiagArriba(x, y, colorActual);
+                    verificacionDiagAbajo(x, y, colorActual);
+                }
             }
         }
-        if (x >= 0 && y >= 0 && x < width && y < height)
+
+        void verificacionHorizontal(int i, int j, Color colorActual)
         {
-            GameObject go = grid[x,y];
-            go.GetComponent<Renderer>().material.SetColor("_Color", jugadorUno);
+            int contadorPrincipal = 0;
+            for (int a = i-3; a <= i+3; a++)
+            {
+                if (a < 0 || a >= ancho)
+                continue;
+                GameObject cube = cub[a, y];
+
+                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                {
+                    contadorPrincipal++;
+                    if (contadorPrincipal == 4)
+                    {
+                        Debug.Log("horizontal");
+                    }
+                }
+                else
+                contadorPrincipal = 0;
+            }
+        }
+
+        void verificacionVertical(int i, int j, Color colorActual)
+        {
+            int contadorPrincipal = 0;
+            for (int b = j-3; b <= j+3; b++)
+            {
+                if (b < 0 || b >= alto)
+                continue;
+                GameObject cube = cub[x, b];
+
+                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                {
+                    contadorPrincipal++;
+                    if (contadorPrincipal == 4)
+                    {
+                        Debug.Log("vertical");
+                    }
+                }
+                else
+                contadorPrincipal = 0;              
+            }
+        }
+
+        void verificacionDiagArriba(int i, int j, Color colorActual)
+        {
+            int contadorPrincipal = 0;
+            int b = j-3;
+            for (int a = i-3; a <= j+3; a++)
+            {
+                if (a < 0 || a >= ancho || b < 0 || b >= alto)
+                continue;
+                GameObject cube = cub[a, b];
+
+                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                {
+                    contadorPrincipal++;
+                    b++;
+                    if (contadorPrincipal == 4)
+                    {
+                        Debug.Log("diagonal arriba");
+                    }
+                }
+                else
+                contadorPrincipal = 0;
+            }
+        }
+
+        void verificacionDiagAbajo(int i, int j, Color colorActual)
+        {
+            int contadorPrincipal = 0;
+            int b = j+3;
+            for (int a = i-3;a <= j+3; a++)
+            {
+                if (a < 0 || a >= ancho || b < 0 || b >= alto)
+                continue;
+                GameObject cube = cub[a, b];
+
+                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                {
+                    contadorPrincipal++;
+                    b--;
+                    if (contadorPrincipal == 4)
+                    {
+                        Debug.Log("diagonal abajo");
+                    }
+                }
+            }
         }
     }
+
 }
