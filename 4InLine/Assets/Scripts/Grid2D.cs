@@ -11,6 +11,9 @@ public class Grid2D : MonoBehaviour
     public Color jugadorUno;
     public Color jugadorDos;
     public bool turnos;
+    public int rule1;
+    public int rule2;
+
 
     void Start()
     {
@@ -59,6 +62,7 @@ public class Grid2D : MonoBehaviour
                     verificacionVertical(x, y, colorActual);
                     verificacionDiagArriba(x, y, colorActual);
                     verificacionDiagAbajo(x, y, colorActual);
+                    rule34(rule1, rule2);
                 }
             }
         }
@@ -68,66 +72,91 @@ public class Grid2D : MonoBehaviour
             int contadorPrincipal = 0;
             for (int a = i-3; a <= i+3; a++)
             {
-                if (a < 0 || a >= ancho)
-                continue;
-                GameObject cube = cub[a, y];
-
-                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                if (a >= 0 && a < ancho)
                 {
-                    contadorPrincipal++;
-                    if (contadorPrincipal == 4)
+                    GameObject cube = cub[a, y];
+
+                    if (cube.GetComponent <Renderer>().material.color == colorActual)
                     {
-                        Debug.Log("horizontal");
+                        contadorPrincipal++;
+                        if (contadorPrincipal == 4)
+                        {
+                            Debug.Log("horizontal");
+                            if (colorActual == jugadorUno)
+                                rule1++;
+                            else
+                                rule2++;
+                        }
                     }
                 }
                 else
-                contadorPrincipal = 0;
+                    contadorPrincipal = 0;
             }
         }
 
         void verificacionVertical(int i, int j, Color colorActual)
         {
             int contadorPrincipal = 0;
+            int e = 0;
+            if (j >= 3)
+                e = j - 3;
+            else          
+                e = j;    
             for (int b = j-3; b <= j+3; b++)
             {
-                if (b < 0 || b >= alto)
-                continue;
-                GameObject cube = cub[x, b];
-
-                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                if (b >= 0 && b < alto)
                 {
-                    contadorPrincipal++;
-                    if (contadorPrincipal == 4)
+                    GameObject cube = cub[x, b];
+
+                    if (cube.GetComponent <Renderer>().material.color == colorActual)
                     {
-                        Debug.Log("vertical");
+                        contadorPrincipal++;
+                        if (contadorPrincipal == 4)
+                        {
+                            Debug.Log("vertical");
+                            if (colorActual == jugadorUno)
+                                rule1++;
+                            else
+                                rule2++;
+                        }
                     }
+                    else
+                        contadorPrincipal = 0;
                 }
-                else
-                contadorPrincipal = 0;              
             }
         }
 
         void verificacionDiagArriba(int i, int j, Color colorActual)
         {
+            
+
             int contadorPrincipal = 0;
             int b = j-3;
-            for (int a = i-3; a <= j+3; a++)
+            for (int a = i - 3; a <= i + 3; a++)
             {
-                if (a < 0 || a >= ancho || b < 0 || b >= alto)
-                continue;
-                GameObject cube = cub[a, b];
-
-                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                if (a >= 0 && a < ancho && b >= 0 && b < alto)
                 {
-                    contadorPrincipal++;
-                    b++;
-                    if (contadorPrincipal == 4)
+                    GameObject cube = cub[a, b];
+
+                    if (cube.GetComponent<Renderer>().material.color == colorActual)
                     {
-                        Debug.Log("diagonal arriba");
+
+                        contadorPrincipal++;
+                        if (contadorPrincipal == 4)
+                        {
+                            Debug.Log("diagonal arriba");
+                            if (colorActual == jugadorUno)
+                                rule1++;
+                            else
+                                rule2++;
+                        }
+                    }
+                    else
+                    {
+                        contadorPrincipal = 0;
                     }
                 }
-                else
-                contadorPrincipal = 0;
+                b++;
             }
         }
 
@@ -135,21 +164,41 @@ public class Grid2D : MonoBehaviour
         {
             int contadorPrincipal = 0;
             int b = j+3;
-            for (int a = i-3;a <= j+3; a++)
+            for (int a = i-3;a <= i+3; a++)
             {
-                if (a < 0 || a >= ancho || b < 0 || b >= alto)
-                continue;
-                GameObject cube = cub[a, b];
-
-                if (cube.GetComponent<Renderer>().material.color == colorActual)
+                if (a >= 0 && a < ancho && b >= 0 && b < alto)
                 {
-                    contadorPrincipal++;
-                    b--;
-                    if (contadorPrincipal == 4)
+                    GameObject cube = cub[a, b];
+
+                    if (cube.GetComponent<Renderer>().material.color == colorActual)
                     {
-                        Debug.Log("diagonal abajo");
+                        contadorPrincipal++;
+
+                        if (contadorPrincipal == 4)
+                        {
+                            Debug.Log("diagonal abajo");
+                            if (colorActual == jugadorUno)
+                                rule1++;
+                            else
+                                rule2++;
+                        }
                     }
+                    else
+                        contadorPrincipal = 0;
                 }
+                b--;
+            }
+        }
+
+        void rule34(int rule1, int rule2)
+        {
+            if (rule1 == 2)
+            {
+                Debug.Log("win1");
+            }
+            else if (rule2 == 2)
+            {
+                Debug.Log("win2");
             }
         }
     }
