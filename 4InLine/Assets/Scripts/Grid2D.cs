@@ -6,14 +6,20 @@ public class Grid2D : MonoBehaviour
 {
     public int ancho;
     public int alto;
+
     public GameObject puzzlePiece;
-    private GameObject[,] cub; 
+    private GameObject[,] cub;
+    private bool juego = true;
+
     public Color jugadorUno;
     public Color jugadorDos;
     public bool turnos;
+
     public int rule1;
     public int rule2;
 
+    public GameObject cartelWin;
+    public Material winMaterial;
 
     void Start()
     {
@@ -35,8 +41,11 @@ public class Grid2D : MonoBehaviour
 
     void Update()
     {
-        Vector3 mposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        selec(mposition);
+        if (juego==true)
+        {
+            Vector3 mposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            selec(mposition);
+        }
     }
     
     public void selec(Vector3 posicion)
@@ -81,7 +90,7 @@ public class Grid2D : MonoBehaviour
                         contadorPrincipal++;
                         if (contadorPrincipal == 4)
                         {
-                            Debug.Log("horizontal");
+
                             if (colorActual == jugadorUno)
                                 rule1++;
                             else
@@ -113,7 +122,7 @@ public class Grid2D : MonoBehaviour
                         contadorPrincipal++;
                         if (contadorPrincipal == 4)
                         {
-                            Debug.Log("vertical");
+                           
                             if (colorActual == jugadorUno)
                                 rule1++;
                             else
@@ -144,7 +153,7 @@ public class Grid2D : MonoBehaviour
                         contadorPrincipal++;
                         if (contadorPrincipal == 4)
                         {
-                            Debug.Log("diagonal arriba");
+                            
                             if (colorActual == jugadorUno)
                                 rule1++;
                             else
@@ -176,7 +185,7 @@ public class Grid2D : MonoBehaviour
 
                         if (contadorPrincipal == 4)
                         {
-                            Debug.Log("diagonal abajo");
+                            
                             if (colorActual == jugadorUno)
                                 rule1++;
                             else
@@ -194,11 +203,22 @@ public class Grid2D : MonoBehaviour
         {
             if (rule1 == 2)
             {
-                Debug.Log("win1");
+                cartelWin = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                cartelWin.transform.localScale = new Vector3(17.86568f, 15f, 17.4f);
+                cartelWin.transform.localPosition = new Vector3(4.71f, 4.51f, -0.6f);
+                cartelWin.GetComponent<Renderer>().material = winMaterial;
+
+                juego = false;
             }
             else if (rule2 == 2)
             {
-                Debug.Log("win2");
+                cartelWin = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                cartelWin.transform.localScale = new Vector3(17.86568f, 15f, 17.4f);
+                cartelWin.transform.localPosition = new Vector3(4.71f, 4.51f, -0.6f);
+                cartelWin.GetComponent<Renderer>().material = winMaterial; ;
+
+                juego = false;
+
             }
         }
     }
