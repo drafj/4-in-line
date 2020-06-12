@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Grid2D : MonoBehaviour
 {
@@ -49,6 +50,11 @@ public class Grid2D : MonoBehaviour
         gana2.SetActive(false);
         ganates.SetActive(false);
     }        
+
+    public void Reiniciar()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     void Update()
     {
