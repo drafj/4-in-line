@@ -27,8 +27,22 @@ public class Grid2D : MonoBehaviour
 
     void Start()
     {
-        cub = new GameObject[ancho,alto];//las siguientes lineas de codigo crean las piezas del cuatro en linea
-        for (int x = 0;  x < ancho; x++)
+        juego = false;
+
+        gana1 = GameObject.Find("Text1");//se desactivan los carteles de victoria para despues activarlos al ganar
+        gana2 = GameObject.Find("Text2");
+        ganates = GameObject.Find("ganates");
+        gana1.SetActive(false);
+        gana2.SetActive(false);
+        ganates.SetActive(false);
+    } 
+    
+    public void CubeCreator()
+    {
+        juego = true;
+
+        cub = new GameObject[ancho, alto];//las siguientes lineas de codigo crean las piezas del cuatro en linea
+        for (int x = 0; x < ancho; x++)
         {
             for (int y = 0; y < alto; y++)
             {
@@ -38,18 +52,12 @@ public class Grid2D : MonoBehaviour
 
                 cube.GetComponent<Renderer>().material.color = Color.black;
 
-                cub [x, y] = cube;
+                cub[x, y] = cube;
 
 
             }
         }
-        gana1 = GameObject.Find("Text1");//se desactivan los carteles de victoria para despues activarlos al ganar
-        gana2 = GameObject.Find("Text2");
-        ganates = GameObject.Find("ganates");
-        gana1.SetActive(false);
-        gana2.SetActive(false);
-        ganates.SetActive(false);
-    }        
+    }
 
     public void Reiniciar()
     {
